@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import cv2
-import numpy 
+import numpy  
 
 # st.header("Welcome to Hakul's world")
 
@@ -39,6 +39,18 @@ elif choice == 'About me':
     # model.predict(fileUp)  # hint for weekly project, should resize / preprocessing before predict
 
 elif choice == 'Camera':
+    st.title('Open your webcam')
+    st.warning('Webcam show on local computer ONLY')
+    show = st.checkbox('Show!')
+    FRAME_WINDOW = st.image([])
+    camera = cv2.VideoCapture(0) # device 1/2
+
+    while show:
+        _, frame = camera.read()
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        FRAME_WINDOW.image(frame)
+    else:
+        camera.release()
 
     cam = cv2.VideoCapture(0) # device 0. If not work, try with 1 or 2
 
